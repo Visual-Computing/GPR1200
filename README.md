@@ -1,10 +1,10 @@
 # GPR1200 Dataset
-## Papper: 
-**GPR1200: A Benchmark for General-Purpose Content-Based Image Retrieval** ([ArXiv]("https://visual-computing.com/"))
+
+**GPR1200: A Benchmark for General-Purpose Content-Based Image Retrieval** ([ArXiv](https://visual-computing.com/project/GPR1200/))
 
 **Konstantin Schall, Kai Uwe Barthel, Nico Hezel, Klaus Jung**
 
-[Visual Computing Group HTW Berlin]("https://visual-computing.com/")
+[Visual Computing Group HTW Berlin](https://visual-computing.com/)
 
 
 <img src="images/GPR_main_pic.jpg" width="100%" title="" alt="main_pic"></img>
