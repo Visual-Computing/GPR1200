@@ -18,7 +18,7 @@ Similar to most vision related tasks, deep learning models have taken over in th
 ## Download Instructions:
 
 The images are available under this [link](https://visual-computing.com/files/GPR1200/GPR1200.zip). Unziping the content will result in an "images" folder, which contains all 12 000 images. Each filename consists of a combination of the GPR1200 category ID and the original name:
-"{category ID}_{original name}.jpg
+**"{category ID}_{original name}.jpg**
 
 ## Evaluation Protocol:
 
