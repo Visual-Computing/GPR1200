@@ -6,7 +6,7 @@ Papper: **GPR1200: A Benchmark for General-Purpose Content-Based Image Retrieval
 [Visual Computing Group HTW Berlin]("https://visual-computing.com/")
 
 
-<img src="images/gpr_main_pic.jpg" width="100%" title="" alt="main_pic"></img>
+<img src="images/GPR_main_pic.jpg" width="100%" title="" alt="main_pic"></img>
 
 
 
