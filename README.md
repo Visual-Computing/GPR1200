@@ -26,7 +26,7 @@ The images are available under this [link](https://visual-computing.com/files/GP
 
 Images are not devided into query and index sets for evaluation and the full mean average precision value is used as the metric. Instructions and evalution code can be found in this repository.
 
-[This notebook](/eval/eval_notebook.ipynb) contains evaluation code for several models with Pytorch and the awesome [timm](https://github.com/rwightman/pytorch-image-models) library.
+[This notebook](eval/eval_notebook.ipynb) contains evaluation code for several models with Pytorch and the awesome [timm](https://github.com/rwightman/pytorch-image-models) library.
 
 If you have precomputed embeddings for the dataset, you can run the eval script with the following command:
 
