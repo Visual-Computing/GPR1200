@@ -15,6 +15,7 @@ Similar to most vision related tasks, deep learning models have taken over in th
 
 ### Results:
 <img src="images/result_table.JPG" width="100%" title="" alt="teaser"></img>
+<img src="images/result_table_description.JPG" width="100%" title="" alt="teaser"></img>
 
 ## Download Instructions:
 
@@ -24,7 +25,28 @@ The images are available under this [link](https://visual-computing.com/files/GP
 ## Evaluation Protocol:
 
 Images are not devided into query and index sets for evaluation and the full mean average precision value is used as the metric. Instructions and evalution code can be found in this repository.
-**Under Construction - Cooming soon**
+
+[This notebook](/eval/eval_notebook.ipynb) contains evaluation code for several models with Pytorch and the awesome [timm](https://github.com/rwightman/pytorch-image-models) library.
+
+If you have precomputed embeddings for the dataset, you can run the eval script with the following command:
+
+```bash
+python ./eval/evaluation.py --evalfile_path 'path/to/embeddings' \
+                            --mode "embeddings" \
+```
+
+In this case an evaluation file has to be provided that contains embeddings in the order created by the GPR1200 dataset object. This can be a npy file or a pickable python list.
+
+```python
+GPR1200_dataset = GPR1200("/path/to/GPR1200/images")
+```
+
+If you work with local features, it is best to provide nearest neighbours indices. For this case run the evaluation script in the indices mode:
+
+```bash
+python ./eval/evaluation.py --evalfile_path 'path/to/indices' \
+                            --mode "indices" \
+```
 
 ## License Informations:
 

@@ -116,8 +116,8 @@ class GPR1200:
         
         cats = self._image_categories
 
-        all_map, aps = compute_mean_average_precision(features, cats)
-        all_map = np.round(all_map, decimals=float_n)
+        aps = compute_mean_average_precision(cats, features)
+        all_map = np.round(np.mean(aps), decimals=float_n)
 
         if compute_partial: 
 
