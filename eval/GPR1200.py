@@ -99,7 +99,7 @@ class GPR1200:
         return self._image_files
 
 
-    def evaluate(self, features=None, compute_partial=False, float_n=4):
+    def evaluate(self, features=None, indices=None, compute_partial=False, float_n=4):
         """
         Compute the mean average precision of each part of this combined data set. 
         Providing just the 'features' will assume the manhatten distance between all images will be computed 
@@ -110,13 +110,22 @@ class GPR1200:
         Parameters
         ----------
         features : ndarray 
-            matrix representing the features of all the images in the dataset
+            matrix representing the embeddings of all the images in the dataset
+        indices: array-lile, shape = [n_samples_Q, n_samples_DB]
+            Nearest neighbours indices 
 
         """
         
         cats = self._image_categories
 
-        aps = compute_mean_average_precision(cats, features)
+        if (indices is None) & (features is None):
+            raise ValueError("Either indices or features_DB has to be provided ")
+
+        if indices is None:
+            aps = compute_mean_average_precision(cats, features_DB=features)
+        if features is None:
+            aps = compute_mean_average_precision(cats, indices=indices)
+
         all_map = np.round(np.mean(aps), decimals=float_n)
 
         if compute_partial: 

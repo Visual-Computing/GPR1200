@@ -31,21 +31,23 @@ Images are not devided into query and index sets for evaluation and the full mea
 If you have precomputed embeddings for the dataset, you can run the eval script with the following command:
 
 ```bash
-python ./eval/evaluation.py --evalfile_path 'path/to/embeddings' \
-                            --mode "embeddings" \
+python ./eval/evaluate.py --evalfile-path '/path/to/embeddings' \
+                            --mode 'embeddings' \
+                            --dataset-path '/path/to/GPR1200/images'
 ```
 
 In this case an evaluation file has to be provided that contains embeddings in the order created by the GPR1200 dataset object. This can be a npy file or a pickable python list.
 
 ```python
-GPR1200_dataset = GPR1200("/path/to/GPR1200/images")
+GPR1200_dataset = GPR1200('/path/to/GPR1200/images')
 ```
 
 If you work with local features, it is best to provide nearest neighbours indices. For this case run the evaluation script in the indices mode:
 
 ```bash
-python ./eval/evaluation.py --evalfile_path 'path/to/indices' \
-                            --mode "indices" \
+python ./eval/evaluate.py --evalfile-path='/path/to/indices' \
+                            --mode='indices' \
+                            --dataset-path='/path/to/GPR1200/images'
 ```
 
 ## License Informations:
