@@ -63,3 +63,24 @@ This dataset is available for for non-commercial research and educational purpos
 * [INSTRE](http://123.57.42.89/instre/home.html) 
 * [Stanford Online Products](https://cvgl.stanford.edu/projects/lifted_struct/) 
 * [IMDB-WIKI](https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/)
+
+
+## Reference
+
+Reference to cite when you use the GPR1200 dataset in a research paper:
+```
+@inproceedings{GPR1200,
+    author = {Schall, Konstantin and Barthel, Kai Uwe and Hezel, Nico and Jung, Klaus},
+    title = {GPR1200: A Benchmark for General-Purpose Content-Based Image Retrieval},
+    year = {2022},
+    isbn = {978-3-030-98357-4},
+    publisher = {Springer-Verlag},
+    address = {Berlin, Heidelberg},
+    url = {https://doi.org/10.1007/978-3-030-98358-1_17},
+    doi = {10.1007/978-3-030-98358-1_17},
+    booktitle = {MultiMedia Modeling: 28th International Conference, MMM 2022, Phu Quoc, Vietnam, June 6–10, 2022, Proceedings, Part I},
+    pages = {205–216},
+    numpages = {12},
+    location = {Phu Quoc, Vietnam}
+}
+```
