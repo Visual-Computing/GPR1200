@@ -22,6 +22,9 @@ Similar to most vision related tasks, deep learning models have taken over in th
 The images are available under this [link](https://visual-computing.com/files/GPR1200/GPR1200.zip). Unziping the content will result in an "images" folder, which contains all 12000 images. Each filename consists of a combination of the GPR1200 category ID and the original name: \
 **"{category ID}_{original name}.jpg**
 
+#### Update:
+We now added a [JSON document](GPR1200_categoryNumber_to_text.json) that provides textual information for each of the GPR1200 categories. Please note, however, that the quality and granularity of the textual description varies greatly between subsets, since this information was obtained from the original dataset sources.
+
 ## Evaluation Protocol:
 
 Images are not devided into query and index sets for evaluation and the full mean average precision value is used as the metric. Instructions and evalution code can be found in this repository.
