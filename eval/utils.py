@@ -60,13 +60,13 @@ def get_average_precision_score(y_true, k=None):
     if k is None:
         k = np.inf
     
-    n_positive = np.sum(y_true.astype(np.int) == 1)
+    n_positive = np.sum(y_true.astype(np.int32) == 1)
     
     if n_positive == 0:
         # early return in cases where no positives are among the ranks
         return 0
     
-    y_true = y_true[:min(y_true.shape[0], k)].astype(np.int)
+    y_true = y_true[:min(y_true.shape[0], k)].astype(np.int32)
     
     score = 0
     n_positive_seen = 0
