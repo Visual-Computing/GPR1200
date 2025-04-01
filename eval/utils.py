@@ -1,44 +1,45 @@
 
 import numpy as np
 
-def get_sorted_distances(features_DB, features_Q=None, k=None):
+import numpy as np
 
+def get_sorted_distances(features_DB, features_Q=None, k=None, metric="cosine"):
     """
-    Computes the cosine similarity of up to two sets of embeddings and returns
-    similarities and distances of k nearest neighbours
+    Computes the similarity or distance of up to two sets of embeddings and returns
+    similarities/distances and indices of k nearest neighbours.
     
     Parameters
     ----------
     features_DB : array-like, shape = [n_samples, dimensionality]
         Database feature vectors
     features_Q : array-like, shape = [n_samples, dimensionality]
-        Query feature vectors. If this parameter is not given, the database fv´s are used as querries
+        Query feature vectors. If this parameter is not given, the database fv´s are used as queries.
     k : int
         k nearest neighbours
+    metric : str
+        Metric to use for distance calculation. Options are "cosine" or "L2".
     """
-
-    sorted_distances, indices = [], []
-
-    if type(features_Q) == type(None):
+    if features_Q is None:
         features_Q = features_DB
-
+    
     if k is None:
         k = len(features_DB)
-
-    f_db_t = features_DB.T
-    for f in features_Q:
-      
-        sims = f.dot(f_db_t)
-
-        sorted_indx = np.argsort(sims)[::-1]
-
-        indices.append(sorted_indx[:k])
-        sorted_distances.append(sims[sorted_indx[:k]])
-
-    sorted_distances, indices = np.array(sorted_distances), np.array(indices)
     
+    if metric == "cosine":
+        similarities = features_Q @ features_DB.T  # Compute cosine similarities
+        indices = np.argsort(similarities, axis=1)[:, ::-1][:, :k]  # Get top-k indices
+        sorted_distances = np.take_along_axis(similarities, indices, axis=1)
+    
+    elif metric == "L2":
+        dists = np.linalg.norm(features_Q[:, None, :] - features_DB[None, :, :], axis=2)  # Compute L2 distances
+        indices = np.argsort(dists, axis=1)[:, :k]  # Get top-k indices
+        sorted_distances = np.take_along_axis(dists, indices, axis=1)
+    
+    else:
+        raise ValueError(f"Unsupported metric: {metric}. Use 'cosine' or 'L2'.")
     
     return sorted_distances, indices
+
 
 
 def get_average_precision_score(y_true, k=None):
@@ -83,7 +84,8 @@ def compute_mean_average_precision(categories_DB,
                                     features_DB=None, 
                                     features_Q=None, 
                                     categories_Q=None, 
-                                    indices=None, 
+                                    indices=None,
+                                    metric="cosine", 
                                     k=None):
     """
     Performs a search for k neirest neighboors with the specified indexing method and computes the mean average precision@k 
@@ -114,7 +116,7 @@ def compute_mean_average_precision(categories_DB,
     if categories_Q is None: categories_Q = categories_DB
     
     if (indices is None):
-        _, indices = get_sorted_distances(features_DB, features_Q, k=k)
+        _, indices = get_sorted_distances(features_DB, features_Q, k=k, metric=metric)
     
     aps = []
     for i in range(0, len(indices)):
