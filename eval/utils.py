@@ -1,7 +1,6 @@
 
 import numpy as np
-
-import numpy as np
+import torch
 
 def get_sorted_distances(features_DB, features_Q=None, k=None, metric="cosine"):
     """
@@ -25,20 +24,25 @@ def get_sorted_distances(features_DB, features_Q=None, k=None, metric="cosine"):
     if k is None:
         k = len(features_DB)
     
+    features_DB_torch = torch.tensor(features_DB, dtype=torch.float32)
+    features_Q_torch = torch.tensor(features_Q, dtype=torch.float32)
+    
     if metric == "cosine":
-        similarities = features_Q @ features_DB.T  # Compute cosine similarities
-        indices = np.argsort(similarities, axis=1)[:, ::-1][:, :k]  # Get top-k indices
-        sorted_distances = np.take_along_axis(similarities, indices, axis=1)
+        similarities = features_Q_torch @ features_DB_torch.T  # Compute cosine similarities
+        indices = torch.argsort(similarities, dim=1, descending=True)[:, :k]  # Get top-k indices
+        sorted_distances = torch.gather(similarities, 1, indices)
     
     elif metric == "L2":
-        dists = np.linalg.norm(features_Q[:, None, :] - features_DB[None, :, :], axis=2)  # Compute L2 distances
-        indices = np.argsort(dists, axis=1)[:, :k]  # Get top-k indices
-        sorted_distances = np.take_along_axis(dists, indices, axis=1)
+        
+        dists = torch.cdist(features_Q_torch, features_DB_torch, p=2)  # Compute L2 distances using torch
+        indices = torch.argsort(dists, dim=1)[:, :k]  # Get top-k indices
+        sorted_distances = torch.gather(dists, 1, indices)
     
     else:
         raise ValueError(f"Unsupported metric: {metric}. Use 'cosine' or 'L2'.")
     
-    return sorted_distances, indices
+    return sorted_distances.numpy(), indices.numpy()
+
 
 
 
