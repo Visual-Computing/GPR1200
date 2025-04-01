@@ -122,7 +122,7 @@ class GPR1200:
             raise ValueError("Either indices or features_DB has to be provided ")
 
         if indices is None:
-            aps = compute_mean_average_precision(cats, features_DB=features, metric=metric))
+            aps = compute_mean_average_precision(cats, features_DB=features, metric=metric)
         if features is None:
             aps = compute_mean_average_precision(cats, indices=indices, metric=metric)
 
